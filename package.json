@@ -5,21 +5,22 @@
   "main": "server.js",
   "scripts": {
     "start": "node backend/server.js",
-    "server": "nodemon backend/server.js"
+    "server": "nodemon backend/server.js",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Abdul King",
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
+    "concurrently": "^8.0.1",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-async-handler": "^1.2.0",
     "git": "^0.1.5",
     "jsonwebtoken": "^9.0.0",
-    "mongoose": "^7.0.1"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.21"
+    "mongoose": "^7.0.1",
+    "nodemon": "^2.0.22"
   }
 }
