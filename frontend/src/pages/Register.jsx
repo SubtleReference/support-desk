@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
-import { register, reset } from "../features/auth/authSlice";
+import { register } from "../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../components/Spinner";
 
@@ -19,21 +19,9 @@ function Register() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
+  const {isLoading} = useSelector(
     (state) => state.auth
   );
-
-  useEffect(() => {
-    if (isError) {
-      toast.error(message);
-    }
-
-    //redirect when logged in
-    if (isSuccess || user) {
-      navigate("/");
-    }
-    dispatch(reset());
-  }, [isError, isSuccess, isLoading, user, message, navigate, dispatch]);
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -53,7 +41,13 @@ function Register() {
         email,
         password,
       };
-      dispatch(register(userData));
+      dispatch(register(userData))
+      .unwrap()
+      .then((user) => {
+        toast.success(`Registered new user - ${user.name}`)
+        navigate('/')
+      })
+      .catch(toast.error)
     }
   };
 
