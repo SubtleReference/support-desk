@@ -80,7 +80,7 @@ export const ticketSlice = createSlice({
       .addCase(closeTicket.fulfilled, (state, action) => {
         state.ticket = action.payload
         state.tickets = state.tickets.map((ticket) =>
-          ticket._id === action.payload._id ? action.payload : ticket 
+          ticket._id === action.payload._id ? action.payload : ticket
         );
       });
   },

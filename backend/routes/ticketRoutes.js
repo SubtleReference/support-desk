@@ -4,8 +4,8 @@ const {
   getTickets,
   getTicket,
   createTicket,
-  updateTicket,
   deleteTicket,
+  updateTicket,
 } = require("../controllers/ticketController");
 
 const { protect } = require("../middleware/authMiddleware");
@@ -22,4 +22,4 @@ router
   .delete(protect, deleteTicket)
   .put(updateTicket);
 
-module.exports = router;
+module.exports = router
